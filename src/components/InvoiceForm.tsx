@@ -1,16 +1,32 @@
+// Full Imports for InvoiceForm.jsx/tsx
+
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { motion } from "framer-motion";
-import { Plus, FileText, Trash2, Download } from "lucide-react";
+
+// Lucide icons
+import { Plus, FileText, Trash2, Download } from "lucide-react"; 
+
+// Your custom/shadcn components
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+
+// Project specific files
 import { invoiceSchema, type InvoiceFormData } from "@/lib/invoiceSchema";
 import { calculateTotals, generateInvoicePDF } from "@/utils/pdfGenerator";
+
+// React hooks and external libraries
 import { useEffect, useState } from "react";
 import { toast } from "sonner";
+
+// ===================================
+// IMPORT NEW COMPONENTS
+// IMPORTANT: Adjust the path below if your Navbar and Footer files are in a different location
+
+// ===================================
 
 const COMPANY_STORAGE_KEY = "quickbill_company_details";
 
@@ -109,41 +125,48 @@ export const InvoiceForm = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      className="w-full max-w-6xl mx-auto p-4 md:p-8"
-    >
-      <div className="mb-8 text-center">
+    <>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="w-full max-w-6xl mx-auto p-4 md:p-8"
+      >
+        
+      {/* NEW CLEAN HERO SECTION */}
+      <div className="mb-16 text-center pt-8">
         <motion.h1
-          className="text-5xl md:text-7xl font-bold mb-3"
-          style={{
-            background: "linear-gradient(135deg, hsl(280, 90%, 70%), hsl(320, 85%, 70%))",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            filter: "drop-shadow(0 0 30px hsl(280, 90%, 60%))",
-          }}
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ duration: 0.5 }}
+          className="text-6xl md:text-8xl font-extrabold mb-4 tracking-tight text-foreground"
+          initial={{ y: -50, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ type: "spring", stiffness: 100, duration: 0.5 }}
         >
-          QuickBill
+          InvoiceFlow
         </motion.h1>
         <motion.p 
-          className="text-foreground/80 text-lg md:text-xl font-light tracking-wide"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          className="text-foreground/70 text-xl md:text-2xl max-w-3xl mx-auto font-light mb-8"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 0.5 }}
         >
-          Professional Invoice Generator
+          Generate clean, professional, and compliant invoices instantly.
+          Simple. Fast. Perfect for freelancers and small businesses.
         </motion.p>
+          <motion.div
+           id="form-start" // <--- ADDED ID HERE
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4, duration: 0.5 }}
+        >
+          <p className="text-sm text-muted-foreground italic">
+            Fill out the form below to create and download your PDF invoice.
+          </p>
+        </motion.div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+      <form id="invoice-form" onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Invoice Details */}
-        <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+        <Card id="invoice-form-start" className="shadow-xl border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-foreground">
               <FileText className="h-5 w-5 text-primary" />
@@ -177,7 +200,7 @@ export const InvoiceForm = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Company Details */}
-          <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+          <Card className="shadow-xl border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300">
             <CardHeader>
               <CardTitle className="text-foreground">Your Company</CardTitle>
             </CardHeader>
@@ -220,7 +243,7 @@ export const InvoiceForm = () => {
           </Card>
 
           {/* Client Details */}
-          <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+          <Card className="shadow-xl border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300">
             <CardHeader>
               <CardTitle className="text-foreground">Bill To</CardTitle>
             </CardHeader>
@@ -260,13 +283,14 @@ export const InvoiceForm = () => {
         </div>
 
         {/* Line Items */}
-        <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+        <Card className="shadow-xl border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300">
           <CardHeader>
             <CardTitle className="text-foreground">Line Items</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {fields.map((field, index) => (
               <motion.div
+                
                 key={field.id}
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -339,7 +363,7 @@ export const InvoiceForm = () => {
 
         {/* Tax and Discount */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+          <Card className="shadow-xl border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300">
             <CardHeader>
               <CardTitle className="text-foreground">Tax & Discount</CardTitle>
             </CardHeader>
@@ -374,8 +398,8 @@ export const InvoiceForm = () => {
             </CardContent>
           </Card>
 
-          {/* Totals */}
-          <Card className="shadow-glow bg-gradient-to-br from-primary/20 to-accent/20 border-primary/40 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+          {/* Totals - Maintained gradient for emphasis but updated shadow/hover */}
+          <Card className="shadow-xl bg-gradient-to-br from-primary/20 to-accent/20 border-primary/40 backdrop-blur-sm hover:shadow-2xl hover:border-primary/60 hover:-translate-y-0.5 transition-all duration-300">
             <CardHeader>
               <CardTitle className="text-foreground">Summary</CardTitle>
             </CardHeader>
@@ -405,7 +429,7 @@ export const InvoiceForm = () => {
         </div>
 
         {/* Notes */}
-        <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
+        <Card className="shadow-xl border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-2xl hover:border-primary/40 hover:-translate-y-0.5 transition-all duration-300">
           <CardHeader>
             <CardTitle className="text-foreground">Notes (Optional)</CardTitle>
           </CardHeader>
@@ -418,7 +442,7 @@ export const InvoiceForm = () => {
           </CardContent>
         </Card>
 
-        {/* Submit Button */}
+        {/* Submit Button - Removed shadow-glow on button as well */}
         <motion.div
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -426,13 +450,14 @@ export const InvoiceForm = () => {
           <Button
             type="submit"
             size="lg"
-            className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground text-lg font-semibold py-6 shadow-glow"
+            className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground text-lg font-semibold py-6 shadow-lg"
           >
             <Download className="h-5 w-5 mr-2" />
             Generate & Download Invoice PDF
           </Button>
         </motion.div>
       </form>
-    </motion.div>
+      </motion.div>
+    </>
   );
 };

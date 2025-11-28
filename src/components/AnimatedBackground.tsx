@@ -65,26 +65,6 @@ export const AnimatedBackground = () => {
         }}
       />
       
-      {/* Additional small accent orb - top right */}
-      <motion.div
-        className="absolute top-1/4 right-1/4 w-[400px] h-[400px] rounded-full"
-        style={{
-          background: "radial-gradient(circle, hsl(300, 85%, 65%) 0%, transparent 70%)",
-          filter: "blur(40px)",
-          opacity: 0.35,
-        }}
-        animate={{
-          x: [0, -50, 0],
-          y: [0, 60, 0],
-          scale: [1, 1.15, 1],
-        }}
-        transition={{
-          duration: 20,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-      />
-      
       {/* Noise overlay for texture */}
       <div 
         className="absolute inset-0 opacity-[0.03]"
