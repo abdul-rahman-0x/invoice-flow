@@ -117,21 +117,35 @@ export const InvoiceForm = () => {
     >
       <div className="mb-8 text-center">
         <motion.h1
-          className="text-4xl md:text-5xl font-bold bg-gradient-primary bg-clip-text text-transparent mb-2"
-          initial={{ scale: 0.9 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 0.3 }}
+          className="text-5xl md:text-7xl font-bold mb-3"
+          style={{
+            background: "linear-gradient(135deg, hsl(280, 90%, 70%), hsl(320, 85%, 70%))",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            filter: "drop-shadow(0 0 30px hsl(280, 90%, 60%))",
+          }}
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           QuickBill
         </motion.h1>
-        <p className="text-muted-foreground text-lg">Professional Invoice Generator</p>
+        <motion.p 
+          className="text-foreground/80 text-lg md:text-xl font-light tracking-wide"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.5 }}
+        >
+          Professional Invoice Generator
+        </motion.p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
         {/* Invoice Details */}
-        <Card className="shadow-card hover:shadow-hover transition-all duration-300">
+        <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-foreground">
               <FileText className="h-5 w-5 text-primary" />
               Invoice Details
             </CardTitle>
@@ -163,9 +177,9 @@ export const InvoiceForm = () => {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Company Details */}
-          <Card className="shadow-card hover:shadow-hover transition-all duration-300">
+          <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
             <CardHeader>
-              <CardTitle>Your Company</CardTitle>
+              <CardTitle className="text-foreground">Your Company</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -206,9 +220,9 @@ export const InvoiceForm = () => {
           </Card>
 
           {/* Client Details */}
-          <Card className="shadow-card hover:shadow-hover transition-all duration-300">
+          <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
             <CardHeader>
-              <CardTitle>Bill To</CardTitle>
+              <CardTitle className="text-foreground">Bill To</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -246,9 +260,9 @@ export const InvoiceForm = () => {
         </div>
 
         {/* Line Items */}
-        <Card className="shadow-card hover:shadow-hover transition-all duration-300">
+        <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
           <CardHeader>
-            <CardTitle>Line Items</CardTitle>
+            <CardTitle className="text-foreground">Line Items</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             {fields.map((field, index) => (
@@ -315,7 +329,7 @@ export const InvoiceForm = () => {
               type="button"
               variant="outline"
               onClick={addLineItem}
-              className="w-full border-dashed"
+              className="w-full border-dashed border-primary/30 hover:border-primary hover:bg-primary/10"
             >
               <Plus className="h-4 w-4 mr-2" />
               Add Line Item
@@ -325,9 +339,9 @@ export const InvoiceForm = () => {
 
         {/* Tax and Discount */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <Card className="shadow-card hover:shadow-hover transition-all duration-300">
+          <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
             <CardHeader>
-              <CardTitle>Tax & Discount</CardTitle>
+              <CardTitle className="text-foreground">Tax & Discount</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div>
@@ -361,29 +375,29 @@ export const InvoiceForm = () => {
           </Card>
 
           {/* Totals */}
-          <Card className="shadow-card hover:shadow-hover transition-all duration-300 bg-gradient-primary text-primary-foreground">
+          <Card className="shadow-glow bg-gradient-to-br from-primary/20 to-accent/20 border-primary/40 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
             <CardHeader>
-              <CardTitle className="text-primary-foreground">Summary</CardTitle>
+              <CardTitle className="text-foreground">Summary</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="flex justify-between text-lg">
+              <div className="flex justify-between text-lg text-foreground">
                 <span>Subtotal:</span>
                 <span className="font-semibold">${totals.subtotal.toFixed(2)}</span>
               </div>
-              <div className="flex justify-between text-lg">
+              <div className="flex justify-between text-lg text-foreground">
                 <span>Tax ({watchedTaxRate}%):</span>
                 <span className="font-semibold">${totals.taxAmount.toFixed(2)}</span>
               </div>
               {totals.discountAmount > 0 && (
-                <div className="flex justify-between text-lg">
+                <div className="flex justify-between text-lg text-foreground">
                   <span>Discount:</span>
                   <span className="font-semibold">-${totals.discountAmount.toFixed(2)}</span>
                 </div>
               )}
-              <div className="border-t border-primary-foreground/30 pt-3">
-                <div className="flex justify-between text-2xl font-bold">
+              <div className="border-t border-primary/30 pt-3">
+                <div className="flex justify-between text-2xl font-bold text-foreground">
                   <span>Total:</span>
-                  <span>${totals.total.toFixed(2)}</span>
+                  <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">${totals.total.toFixed(2)}</span>
                 </div>
               </div>
             </CardContent>
@@ -391,9 +405,9 @@ export const InvoiceForm = () => {
         </div>
 
         {/* Notes */}
-        <Card className="shadow-card hover:shadow-hover transition-all duration-300">
+        <Card className="shadow-glow border-primary/20 bg-card/50 backdrop-blur-sm hover:shadow-glow transition-all duration-300">
           <CardHeader>
-            <CardTitle>Notes (Optional)</CardTitle>
+            <CardTitle className="text-foreground">Notes (Optional)</CardTitle>
           </CardHeader>
           <CardContent>
             <Textarea
@@ -412,7 +426,7 @@ export const InvoiceForm = () => {
           <Button
             type="submit"
             size="lg"
-            className="w-full bg-gradient-primary hover:opacity-90 text-lg font-semibold py-6"
+            className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground text-lg font-semibold py-6 shadow-glow"
           >
             <Download className="h-5 w-5 mr-2" />
             Generate & Download Invoice PDF
