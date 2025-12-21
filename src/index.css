@@ -1,13 +1,13 @@
+/* stylelint-disable at-rule-no-unknown */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* stylelint-enable at-rule-no-unknown */
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
-All colors MUST be HSL.
-*/
-
+/* Base Styles */
 @layer base {
   :root {
+    /* HSL color values for Tailwind v3 */
     --background: 220 26% 8%;
     --foreground: 0 0% 98%;
 
@@ -19,9 +19,7 @@ All colors MUST be HSL.
 
     --primary: 280 90% 60%;
     --primary-foreground: 0 0% 100%;
-    
-    --primary-glow: 280 90% 70%;
-    
+
     --secondary: 260 80% 55%;
     --secondary-foreground: 0 0% 100%;
 
@@ -39,85 +37,27 @@ All colors MUST be HSL.
     --ring: 280 90% 60%;
 
     --radius: 0.75rem;
-    
-    /* Gradient tokens */
+
+    /* Custom Gradients and Shadows */
     --gradient-primary: linear-gradient(135deg, hsl(280, 90%, 60%), hsl(320, 85%, 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(260, 80%, 55%), hsl(280, 90%, 60%));
-    --gradient-background: linear-gradient(135deg, hsl(220, 26%, 8%), hsl(240, 30%, 12%));
-    
-    /* Shadow tokens */
-    --shadow-card: 0 8px 32px -4px hsl(280 90% 60% / 0.3), 0 4px 16px -2px hsl(320 85% 60% / 0.2);
-    --shadow-hover: 0 16px 48px -6px hsl(280 90% 60% / 0.5), 0 8px 24px -4px hsl(320 85% 60% / 0.3);
     --shadow-glow: 0 0 40px hsl(280 90% 60% / 0.6), 0 0 80px hsl(320 85% 60% / 0.4);
-    
-    /* Animation tokens */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 
-  .dark {
-    --background: 220 26% 8%;
-    --foreground: 0 0% 98%;
-
-    --card: 220 20% 12%;
-    --card-foreground: 0 0% 98%;
-
-    --popover: 220 20% 12%;
-    --popover-foreground: 0 0% 98%;
-
-    --primary: 280 90% 60%;
-    --primary-foreground: 0 0% 100%;
-    
-    --primary-glow: 280 90% 70%;
-
-    --secondary: 260 80% 55%;
-    --secondary-foreground: 0 0% 100%;
-
-    --muted: 220 20% 20%;
-    --muted-foreground: 220 10% 60%;
-
-    --accent: 320 85% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 220 20% 20%;
-    --input: 220 20% 18%;
-    --ring: 280 90% 60%;
-    
-    --gradient-primary: linear-gradient(135deg, hsl(280, 90%, 60%), hsl(320, 85%, 60%));
-    --gradient-secondary: linear-gradient(135deg, hsl(260, 80%, 55%), hsl(280, 90%, 60%));
-    --gradient-background: linear-gradient(135deg, hsl(220, 26%, 8%), hsl(240, 30%, 12%));
-    
-    --shadow-card: 0 8px 32px -4px hsl(280 90% 60% / 0.3), 0 4px 16px -2px hsl(320 85% 60% / 0.2);
-    --shadow-hover: 0 16px 48px -6px hsl(280 90% 60% / 0.5), 0 8px 24px -4px hsl(320 85% 60% / 0.3);
-    
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
-  }
-}
-
-@layer base {
   * {
     @apply border-border;
   }
 
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+/* If you need a dark mode toggle via class */
+@layer base {
+  .dark {
+    --background: 220 26% 8%;
+    --foreground: 0 0% 98%;
+    /* ... add other dark overrides here if they differ from root ... */
   }
 }
