@@ -450,7 +450,7 @@ export const InvoiceForm = () => {
           <Button
             type="submit"
             size="lg"
-            className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-primary-foreground text-lg font-semibold py-6 shadow-lg"
+            className="w-full bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white text-lg font-semibold py-6 shadow-lg opacity-100"
           >
             <Download className="h-5 w-5 mr-2" />
             Generate & Download Invoice PDF
