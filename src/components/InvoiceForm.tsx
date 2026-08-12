@@ -165,18 +165,19 @@ export const InvoiceForm = () => {
                         initial={{ y: 20, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.2, duration: 0.5 }}>
-                        A high-fidelity, client-side billing engine built for
-                        structured transaction management. Generate compliant,
-                        schema-validated PDF invoices with zero server latency.
+                        Create professional invoices in minutes. Add your
+                        business and client details, manage line items,
+                        calculate taxes and discounts, and download a
+                        ready-to-send PDF instantly.
                     </motion.p>
+
                     <motion.div
                         id="form-start"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: 0.4, duration: 0.5 }}>
                         <p className="text-xs text-muted-foreground italic">
-                            Complete the form below to compile and download your
-                            schema-validated PDF invoice.
+                            Fill in the details below and generate your invoice.
                         </p>
                     </motion.div>
                 </div>
